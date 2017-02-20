@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2B68B11D7E203646F5429019 /* Pods_podocpodoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9698AD655E8BB8B36843058 /* Pods_podocpodoc.framework */; };
+		87AA55101E5AC130001B6684 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AA550F1E5AC130001B6684 /* MainController.swift */; };
+		87AA55121E5AC166001B6684 /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AA55111E5AC166001B6684 /* FriendController.swift */; };
+		87AA55141E5AC205001B6684 /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AA55131E5AC205001B6684 /* FriendViewModel.swift */; };
+		87AA55161E5AC23D001B6684 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AA55151E5AC23D001B6684 /* Friend.swift */; };
 		87EF09F41E2C6D9E00091E77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF09F31E2C6D9E00091E77 /* AppDelegate.swift */; };
 		87EF09F61E2C6D9E00091E77 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF09F51E2C6D9E00091E77 /* ViewController.swift */; };
 		87EF09F91E2C6D9E00091E77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EF09F71E2C6D9E00091E77 /* Main.storyboard */; };
@@ -18,6 +22,10 @@
 /* Begin PBXFileReference section */
 		04B9DB7566EB6533EC0EDB15 /* Pods-podocpodoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-podocpodoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-podocpodoc/Pods-podocpodoc.debug.xcconfig"; sourceTree = "<group>"; };
 		6CCBC2AA7E990D71D68F426B /* Pods-podocpodoc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-podocpodoc.release.xcconfig"; path = "Pods/Target Support Files/Pods-podocpodoc/Pods-podocpodoc.release.xcconfig"; sourceTree = "<group>"; };
+		87AA550F1E5AC130001B6684 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		87AA55111E5AC166001B6684 /* FriendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
+		87AA55131E5AC205001B6684 /* FriendViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
+		87AA55151E5AC23D001B6684 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		87EF09F01E2C6D9E00091E77 /* podocpodoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podocpodoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87EF09F31E2C6D9E00091E77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87EF09F51E2C6D9E00091E77 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +92,10 @@
 				87EF09FA1E2C6D9E00091E77 /* Assets.xcassets */,
 				87EF09FC1E2C6D9E00091E77 /* LaunchScreen.storyboard */,
 				87EF09FF1E2C6D9E00091E77 /* Info.plist */,
+				87AA550F1E5AC130001B6684 /* MainController.swift */,
+				87AA55111E5AC166001B6684 /* FriendController.swift */,
+				87AA55131E5AC205001B6684 /* FriendViewModel.swift */,
+				87AA55151E5AC23D001B6684 /* Friend.swift */,
 			);
 			path = podocpodoc;
 			sourceTree = "<group>";
@@ -211,7 +223,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87AA55141E5AC205001B6684 /* FriendViewModel.swift in Sources */,
 				87EF09F61E2C6D9E00091E77 /* ViewController.swift in Sources */,
+				87AA55121E5AC166001B6684 /* FriendController.swift in Sources */,
+				87AA55161E5AC23D001B6684 /* Friend.swift in Sources */,
+				87AA55101E5AC130001B6684 /* MainController.swift in Sources */,
 				87EF09F41E2C6D9E00091E77 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +394,7 @@
 				87EF0A041E2C6D9E00091E77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
