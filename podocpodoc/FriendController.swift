@@ -22,6 +22,8 @@ class FriendController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Friends"
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
         // Do any additional setup after loading the view.
