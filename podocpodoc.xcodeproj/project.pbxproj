@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F179015EEABED0B9562DA39 /* Pods_nabijam_dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF1B5DC9ADE3F0D24D47078B /* Pods_nabijam_dev.framework */; };
 		2B68B11D7E203646F5429019 /* Pods_podocpodoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9698AD655E8BB8B36843058 /* Pods_podocpodoc.framework */; };
 		874A8E621E6021EE008A018D /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874A8E611E6021EE008A018D /* ChatController.swift */; };
 		87AA55101E5AC130001B6684 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AA550F1E5AC130001B6684 /* MainController.swift */; };
@@ -18,6 +19,8 @@
 		87EF09F91E2C6D9E00091E77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EF09F71E2C6D9E00091E77 /* Main.storyboard */; };
 		87EF09FB1E2C6D9E00091E77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87EF09FA1E2C6D9E00091E77 /* Assets.xcassets */; };
 		87EF09FE1E2C6D9E00091E77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EF09FC1E2C6D9E00091E77 /* LaunchScreen.storyboard */; };
+		87F91E431E88EA3F00BAC88A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F91E421E88EA3F00BAC88A /* LoginViewController.swift */; };
+		87F91E451E88EBB900BAC88A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87F91E441E88EBB900BAC88A /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,14 +31,19 @@
 		87AA55111E5AC166001B6684 /* FriendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
 		87AA55131E5AC205001B6684 /* FriendViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 		87AA55151E5AC23D001B6684 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
-		87EF09F01E2C6D9E00091E77 /* podocpodoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podocpodoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		87EF09F01E2C6D9E00091E77 /* nabijam_dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nabijam_dev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87EF09F31E2C6D9E00091E77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87EF09F51E2C6D9E00091E77 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		87EF09F81E2C6D9E00091E77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		87EF09FA1E2C6D9E00091E77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87EF09FD1E2C6D9E00091E77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		87EF09FF1E2C6D9E00091E77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87F91E421E88EA3F00BAC88A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		87F91E441E88EBB900BAC88A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A9698AD655E8BB8B36843058 /* Pods_podocpodoc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_podocpodoc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA33D2738C4D65D00A63A15B /* Pods-nabijam_dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nabijam_dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-nabijam_dev/Pods-nabijam_dev.debug.xcconfig"; sourceTree = "<group>"; };
+		E5A8ECA6AC01CEAAE77371C0 /* Pods-nabijam_dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nabijam_dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-nabijam_dev/Pods-nabijam_dev.release.xcconfig"; sourceTree = "<group>"; };
+		FF1B5DC9ADE3F0D24D47078B /* Pods_nabijam_dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nabijam_dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +52,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B68B11D7E203646F5429019 /* Pods_podocpodoc.framework in Frameworks */,
+				0F179015EEABED0B9562DA39 /* Pods_nabijam_dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +64,8 @@
 			children = (
 				04B9DB7566EB6533EC0EDB15 /* Pods-podocpodoc.debug.xcconfig */,
 				6CCBC2AA7E990D71D68F426B /* Pods-podocpodoc.release.xcconfig */,
+				AA33D2738C4D65D00A63A15B /* Pods-nabijam_dev.debug.xcconfig */,
+				E5A8ECA6AC01CEAAE77371C0 /* Pods-nabijam_dev.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -63,8 +74,19 @@
 			isa = PBXGroup;
 			children = (
 				A9698AD655E8BB8B36843058 /* Pods_podocpodoc.framework */,
+				FF1B5DC9ADE3F0D24D47078B /* Pods_nabijam_dev.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		876603B71E88FF5700B63F8E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				87EF09FF1E2C6D9E00091E77 /* Info.plist */,
+				87EF09FA1E2C6D9E00091E77 /* Assets.xcassets */,
+				87F91E441E88EBB900BAC88A /* GoogleService-Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		87EF09E71E2C6D9E00091E77 = {
@@ -80,7 +102,7 @@
 		87EF09F11E2C6D9E00091E77 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				87EF09F01E2C6D9E00091E77 /* podocpodoc.app */,
+				87EF09F01E2C6D9E00091E77 /* nabijam_dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,17 +110,17 @@
 		87EF09F21E2C6D9E00091E77 /* podocpodoc */ = {
 			isa = PBXGroup;
 			children = (
+				876603B71E88FF5700B63F8E /* Supporting Files */,
 				87EF09F31E2C6D9E00091E77 /* AppDelegate.swift */,
-				87EF09F51E2C6D9E00091E77 /* ViewController.swift */,
-				87EF09F71E2C6D9E00091E77 /* Main.storyboard */,
-				87EF09FA1E2C6D9E00091E77 /* Assets.xcassets */,
-				87EF09FC1E2C6D9E00091E77 /* LaunchScreen.storyboard */,
-				87EF09FF1E2C6D9E00091E77 /* Info.plist */,
-				87AA550F1E5AC130001B6684 /* MainController.swift */,
+				874A8E611E6021EE008A018D /* ChatController.swift */,
+				87AA55151E5AC23D001B6684 /* Friend.swift */,
 				87AA55111E5AC166001B6684 /* FriendController.swift */,
 				87AA55131E5AC205001B6684 /* FriendViewModel.swift */,
-				87AA55151E5AC23D001B6684 /* Friend.swift */,
-				874A8E611E6021EE008A018D /* ChatController.swift */,
+				87EF09FC1E2C6D9E00091E77 /* LaunchScreen.storyboard */,
+				87F91E421E88EA3F00BAC88A /* LoginViewController.swift */,
+				87EF09F71E2C6D9E00091E77 /* Main.storyboard */,
+				87AA550F1E5AC130001B6684 /* MainController.swift */,
+				87EF09F51E2C6D9E00091E77 /* ViewController.swift */,
 			);
 			path = podocpodoc;
 			sourceTree = "<group>";
@@ -106,9 +128,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		87EF09EF1E2C6D9E00091E77 /* podocpodoc */ = {
+		87EF09EF1E2C6D9E00091E77 /* nabijam_dev */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 87EF0A021E2C6D9E00091E77 /* Build configuration list for PBXNativeTarget "podocpodoc" */;
+			buildConfigurationList = 87EF0A021E2C6D9E00091E77 /* Build configuration list for PBXNativeTarget "nabijam_dev" */;
 			buildPhases = (
 				4F627B0D21F47815DEAA567F /* [CP] Check Pods Manifest.lock */,
 				87EF09EC1E2C6D9E00091E77 /* Sources */,
@@ -121,9 +143,9 @@
 			);
 			dependencies = (
 			);
-			name = podocpodoc;
+			name = nabijam_dev;
 			productName = podocpodoc;
-			productReference = 87EF09F01E2C6D9E00091E77 /* podocpodoc.app */;
+			productReference = 87EF09F01E2C6D9E00091E77 /* nabijam_dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -138,6 +160,7 @@
 				TargetAttributes = {
 					87EF09EF1E2C6D9E00091E77 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = C56Y225XTT;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -155,7 +178,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				87EF09EF1E2C6D9E00091E77 /* podocpodoc */,
+				87EF09EF1E2C6D9E00091E77 /* nabijam_dev */,
 			);
 		};
 /* End PBXProject section */
@@ -166,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87EF09FE1E2C6D9E00091E77 /* LaunchScreen.storyboard in Resources */,
+				87F91E451E88EBB900BAC88A /* GoogleService-Info.plist in Resources */,
 				87EF09FB1E2C6D9E00091E77 /* Assets.xcassets in Resources */,
 				87EF09F91E2C6D9E00091E77 /* Main.storyboard in Resources */,
 			);
@@ -201,7 +225,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-podocpodoc/Pods-podocpodoc-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-nabijam_dev/Pods-nabijam_dev-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CF060BF7A22C2C96900C6361 /* [CP] Embed Pods Frameworks */ = {
@@ -216,7 +240,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-podocpodoc/Pods-podocpodoc-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-nabijam_dev/Pods-nabijam_dev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -230,6 +254,7 @@
 				87EF09F61E2C6D9E00091E77 /* ViewController.swift in Sources */,
 				874A8E621E6021EE008A018D /* ChatController.swift in Sources */,
 				87AA55121E5AC166001B6684 /* FriendController.swift in Sources */,
+				87F91E431E88EA3F00BAC88A /* LoginViewController.swift in Sources */,
 				87AA55161E5AC23D001B6684 /* Friend.swift in Sources */,
 				87AA55101E5AC130001B6684 /* MainController.swift in Sources */,
 				87EF09F41E2C6D9E00091E77 /* AppDelegate.swift in Sources */,
@@ -353,13 +378,14 @@
 		};
 		87EF0A031E2C6D9E00091E77 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04B9DB7566EB6533EC0EDB15 /* Pods-podocpodoc.debug.xcconfig */;
+			baseConfigurationReference = AA33D2738C4D65D00A63A15B /* Pods-nabijam_dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = C56Y225XTT;
 				INFOPLIST_FILE = podocpodoc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.twentyhours.podocpodoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.twentyhours.nabijam.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -367,13 +393,14 @@
 		};
 		87EF0A041E2C6D9E00091E77 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6CCBC2AA7E990D71D68F426B /* Pods-podocpodoc.release.xcconfig */;
+			baseConfigurationReference = E5A8ECA6AC01CEAAE77371C0 /* Pods-nabijam_dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = C56Y225XTT;
 				INFOPLIST_FILE = podocpodoc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.twentyhours.podocpodoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.twentyhours.nabijam.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -391,7 +418,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		87EF0A021E2C6D9E00091E77 /* Build configuration list for PBXNativeTarget "podocpodoc" */ = {
+		87EF0A021E2C6D9E00091E77 /* Build configuration list for PBXNativeTarget "nabijam_dev" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				87EF0A031E2C6D9E00091E77 /* Debug */,

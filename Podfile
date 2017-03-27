@@ -1,7 +1,11 @@
 platform :ios, '8.0'
 use_frameworks!
 
-target 'podocpodoc' do
+target 'nabijam_dev' do
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+
   pod 'Alamofire', '~> 4.3'
 
   pod 'RxSwift', '~> 3.1'
