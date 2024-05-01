@@ -80,12 +80,7 @@ impl Editor {
                     }
                 }
             }
-        } else {
-            #[cfg(debug_assertions)]
-            {
-                panic!("Received and discarded unsupported or non-press event.");
-            }
-        }
+        } 
     }
     fn refresh_screen(&mut self) {
         let _ = Terminal::hide_caret();
