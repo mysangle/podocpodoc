@@ -99,8 +99,12 @@ impl View {
             Direction::End => x = self.buffer.lines.get(y).map_or(0, Line::len),
         }
         //snap x to valid position
-        x = self.buffer.lines.get(y).map_or(0, |line| min(line.len(), x));
-        
+        x = self
+            .buffer
+            .lines
+            .get(y)
+            .map_or(0, |line| min(line.len(), x));
+
         //snap y to valid position
         y = min(y, self.buffer.lines.len());
 
