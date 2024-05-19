@@ -21,7 +21,6 @@ pub struct Location {
 pub struct View {
     buffer: Buffer,
     needs_redraw: bool,
-    // The view always starts at `(0/0)`. The `size` property determines the visible area.
     size: Size,
     text_location: Location,
     scroll_offset: Position,
