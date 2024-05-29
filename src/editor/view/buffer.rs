@@ -1,7 +1,6 @@
 use std::fs::{read_to_string, File};
 use std::io::Error;
 use std::io::Write;
-
 use super::FileInfo;
 use super::Line;
 use super::Location;
@@ -26,6 +25,18 @@ impl Buffer {
             file_info: FileInfo::from(file_name),
             dirty: false,
         })
+    }
+    pub fn search(&self, query: &str) -> Option<Location> {
+        for (line_index, line) in self.lines.iter().enumerate() {
+            if let Some(grapheme_index) = line.search(query) {
+                return Some(Location {
+                    grapheme_index,
+                    line_index
+                });
+            }
+
+        }
+        None
     }
     fn save_to_file(&self, file_info: &FileInfo) -> Result<(), Error> {
         if let Some(file_path) = &file_info.get_path() {
