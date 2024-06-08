@@ -1,3 +1,4 @@
+use crate::prelude::*;
 use crossterm::event::{read, Event, KeyEvent, KeyEventKind};
 use std::{
     env,
@@ -8,17 +9,12 @@ mod annotatedstring;
 mod command;
 mod documentstatus;
 mod line;
-mod uicomponents;
-
-mod position;
-mod size;
 mod terminal;
+mod uicomponents;
 
 use annotatedstring::{AnnotatedString, AnnotationType};
 use documentstatus::DocumentStatus;
 use line::Line;
-use position::{Col, Position, Row};
-use size::Size;
 use terminal::Terminal;
 use uicomponents::{CommandBar, MessageBar, StatusBar, UIComponent, View};
 
@@ -28,8 +24,6 @@ use self::command::{
     Move::{Down, Left, Right, Up},
     System::{Dismiss, Quit, Resize, Save, Search},
 };
-pub const NAME: &str = env!("CARGO_PKG_NAME");
-pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 const QUIT_TIMES: u8 = 3;
 

@@ -1,4 +1,5 @@
 mod attribute;
+use crate::prelude::*;
 use attribute::Attribute;
 use crossterm::cursor::{Hide, MoveTo, Show};
 use crossterm::style::{
@@ -13,7 +14,6 @@ use crossterm::{queue, Command};
 use std::io::{stdout, Error, Write};
 
 use super::AnnotatedString;
-use super::{Position, Size};
 
 /// Represents the Terminal.
 /// Edge Case for platforms where `usize` < `u16`:
@@ -89,14 +89,14 @@ impl Terminal {
         Self::queue_command(Print(string))?;
         Ok(())
     }
-    pub fn print_row(row: usize, line_text: &str) -> Result<(), Error> {
+    pub fn print_row(row: RowIdx, line_text: &str) -> Result<(), Error> {
         Self::move_caret_to(Position { row, col: 0 })?;
         Self::clear_line()?;
         Self::print(line_text)?;
         Ok(())
     }
     pub fn print_annotated_row(
-        row: usize,
+        row: RowIdx,
         annotated_string: &AnnotatedString,
     ) -> Result<(), Error> {
         Self::move_caret_to(Position { row, col: 0 })?;
@@ -128,7 +128,7 @@ impl Terminal {
         Self::queue_command(ResetColor)?;
         Ok(())
     }
-    pub fn print_inverted_row(row: usize, line_text: &str) -> Result<(), Error> {
+    pub fn print_inverted_row(row: RowIdx, line_text: &str) -> Result<(), Error> {
         let width = Self::size()?.width;
         Self::print_row(row, &format!("{Reverse}{line_text:width$.width$}{Reset}"))
     }
