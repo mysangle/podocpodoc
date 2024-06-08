@@ -6,22 +6,21 @@ use std::{
 };
 mod annotatedstring;
 mod command;
-mod uicomponents;
 mod documentstatus;
 mod line;
+mod uicomponents;
 
 mod position;
 mod size;
 mod terminal;
 
-
 use annotatedstring::{AnnotatedString, AnnotationType};
-use uicomponents::{CommandBar,MessageBar,View, StatusBar, UIComponent};
 use documentstatus::DocumentStatus;
 use line::Line;
 use position::{Col, Position, Row};
 use size::Size;
 use terminal::Terminal;
+use uicomponents::{CommandBar, MessageBar, StatusBar, UIComponent, View};
 
 use self::command::{
     Command::{self, Edit, Move, System},
