@@ -14,6 +14,7 @@ use crossterm::{queue, Command};
 use std::io::{stdout, Error, Write};
 
 use super::AnnotatedString;
+use super::AnnotationType;
 
 /// Represents the Terminal.
 /// Edge Case for platforms where `usize` < `u16`:
@@ -123,8 +124,11 @@ impl Terminal {
         Self::move_caret_to(Position { row, col: 0 })?;
         Self::clear_line()?;
 
-        Self::print(line_num)?;
+        // line number
+        Self::print_line_number(line_num)?;
         Self::print(" ")?;
+
+        // text
         annotated_string
             .into_iter()
             .try_for_each(|part| -> Result<(), Error> {
@@ -139,6 +143,13 @@ impl Terminal {
             })?;
         Ok(())
     }
+    fn print_line_number(line_num: &str) -> Result<(), Error> {
+        Self::set_attribute(&AnnotationType::LineNumber.into())?;
+        Self::print(line_num)?;
+        Self::reset_color()?;
+        Ok(())
+    }
+
     fn set_attribute(attribute: &Attribute) -> Result<(), Error> {
         if let Some(foreground_color) = attribute.foreground {
             Self::queue_command(SetForegroundColor(foreground_color))?;
@@ -148,6 +159,7 @@ impl Terminal {
         }
         Ok(())
     }
+    
     fn reset_color() -> Result<(), Error> {
         Self::queue_command(ResetColor)?;
         Ok(())

@@ -1,5 +1,6 @@
 #[derive(Copy, Clone, Eq, PartialEq, Debug)]
 pub enum AnnotationType {
+    LineNumber,
     Match,
     SelectedMatch,
     Number,

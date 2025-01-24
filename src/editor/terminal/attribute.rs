@@ -10,6 +10,14 @@ pub struct Attribute {
 impl From<AnnotationType> for Attribute {
     fn from(annotation_type: AnnotationType) -> Self {
         match annotation_type {
+            AnnotationType::LineNumber => Self {
+                foreground: Some(Color::Rgb {
+                    r: 255,
+                    g: 253,
+                    b: 208,
+                }),
+                background: None,
+            },
             AnnotationType::Match => Self {
                 foreground: Some(Color::Rgb {
                     r: 255,
