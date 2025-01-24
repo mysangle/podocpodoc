@@ -1,6 +1,6 @@
-use std::{cmp::min, io::Error};
+use std::{cmp::{max, min}, io::Error};
 
-use crate::editor::RowIdx;
+use crate::editor::{annotatedstring::AnnotatedString, RowIdx};
 use crate::prelude::*;
 
 use super::super::{
@@ -18,6 +18,8 @@ mod fileinfo;
 use fileinfo::FileInfo;
 mod searchinfo;
 use searchinfo::SearchInfo;
+
+const MIN_LINE_NUM_WIDTH: usize = 3;
 
 #[derive(Default)]
 pub struct View {
@@ -159,8 +161,12 @@ impl View {
             Move::Down => self.move_down(1),
             Move::Left => self.move_left(),
             Move::Right => self.move_right(),
-            Move::PageUp => self.move_up(height.saturating_sub(1)),
-            Move::PageDown => self.move_down(height.saturating_sub(1)),
+            Move::PageUp => self.scroll_up(height.saturating_sub(1)),
+            Move::PageDown => self.scroll_down(height.saturating_sub(1)),
+            Move::HalfPageUp => self.scroll_up(height / 2),
+            Move::HalfPageDown => self.scroll_down(height / 2),
+            Move::PageUpOneLine => self.scroll_up_one_line(),
+            Move::PageDownOneLine => self.scroll_down_one_line(),
             Move::StartOfLine => self.move_to_start_of_line(),
             Move::EndOfLine => self.move_to_end_of_line(),
         }
@@ -202,6 +208,7 @@ impl View {
     fn render_line(at: RowIdx, line_text: &str) -> Result<(), Error> {
         Terminal::print_row(at, line_text)
     }
+    
     fn build_welcome_message(width: usize) -> String {
         if width == 0 {
             return String::new();
@@ -249,6 +256,38 @@ impl View {
             self.set_needs_redraw(true);
         }
     }
+    fn scroll_up(&mut self, step: usize) {
+        self.move_up(step);
+        self.scroll_backward(step);
+    }
+    fn scroll_down(&mut self, step: usize) {
+        self.move_down(step);
+        self.scroll_forward(step);
+    }
+    fn scroll_up_one_line(&mut self) {
+        let Position { row, col: _ } = self.caret_position();
+        if row == self.size.height - 1 {
+            self.move_up(1);
+        }
+        self.scroll_backward(1);
+    }
+    fn scroll_down_one_line(&mut self) {
+        let Position { row, col: _ } = self.caret_position();
+        if row == 0 {
+            self.move_down(1);
+        }
+        self.scroll_forward(1);
+    }
+    fn scroll_backward(&mut self, step: usize) {
+        self.scroll_offset.row = self.scroll_offset.row.saturating_sub(step);
+        self.scroll_offset.row = max(0, self.scroll_offset.row);
+        self.set_needs_redraw(true);
+    }
+    fn scroll_forward(&mut self, step: usize) {
+        self.scroll_offset.row = self.scroll_offset.row.saturating_add(step);
+        self.scroll_offset.row = min(self.buffer.height() - 4, self.scroll_offset.row);
+        self.set_needs_redraw(true);
+    }
     fn scroll_text_location_into_view(&mut self) {
         let Position { row, col } = self.text_location_to_position();
         self.scroll_vertically(row);
@@ -268,8 +307,9 @@ impl View {
     // region: Location and Position Handling
 
     pub fn caret_position(&self) -> Position {
-        self.text_location_to_position()
-            .saturating_sub(self.scroll_offset)
+        let mut text_position = self.text_location_to_position();
+        text_position.col += self.calculate_line_num_width() + 1;
+        text_position.saturating_sub(self.scroll_offset)
     }
 
     fn text_location_to_position(&self) -> Position {
@@ -294,6 +334,7 @@ impl View {
         self.snap_to_valid_grapheme();
         self.snap_to_valid_line();
     }
+    
     // clippy::arithmetic_side_effects: This function performs arithmetic calculations
     // after explicitly checking that the target value will be within bounds.
     #[allow(clippy::arithmetic_side_effects)]
@@ -339,6 +380,26 @@ impl View {
     }
 
     // endregion
+
+    fn render_annotated_line(&self, at: RowIdx, annotated_text: &AnnotatedString) -> Result<(), Error> {
+        let line_at = self.scroll_offset.row + at;
+        let line_num = self.line_num_string(line_at + 1);
+        Terminal::print_annotated_row_with_line_num(at, &line_num, annotated_text)
+    }
+
+    fn line_num_string(&self, at: RowIdx) -> String {
+        let num_width = self.calculate_line_num_width();
+        format!("{:width$}", at, width = num_width)
+    }
+
+    fn calculate_line_num_width(&self) -> usize {
+        let height = self.buffer.height();
+        if height == 0 {
+            return MIN_LINE_NUM_WIDTH;
+        }
+
+        max(MIN_LINE_NUM_WIDTH, ((height as f64).log10().floor() as i32 + 1) as usize)
+    }
 }
 
 impl UIComponent for View {
@@ -387,11 +448,15 @@ impl UIComponent for View {
                 self.buffer
                     .get_highlighted_substring(line_idx, left..right, &highlighter)
             {
-                Terminal::print_annotated_row(current_row, &annotated_string)?;
+                self.render_annotated_line(current_row, &annotated_string)?;
             } else if current_row == top_third && self.buffer.is_empty() {
                 Self::render_line(current_row, &Self::build_welcome_message(width))?;
             } else {
-                Self::render_line(current_row, "~")?;
+                if current_row != 0 {
+                    Self::render_line(current_row, "~")?;
+                } else {
+                    Self::render_line(current_row, "  1")?;
+                }
             }
         }
         Ok(())
