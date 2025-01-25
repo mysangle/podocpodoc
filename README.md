@@ -8,7 +8,11 @@ Podocpodoc is a text editor. Podocpodoc was started as a forked version from [he
 
 Podocpodoc uses helix like key bindings.
 
-### Commands
+### Normal mode
+
+Normal mode is the default mode. You can return to it from other modes by pressing the Escape key
+
+#### Commands
 
 | name | description |
 | ---- | ----------- |
@@ -17,7 +21,7 @@ Podocpodoc uses helix like key bindings.
 | :w   | Write changes to disk |
 | :wq  | Write changes to disk and close the current view |
 
-### Movement
+#### Movement
 
 | key | description |
 | --- | ----------- |
@@ -28,9 +32,18 @@ Podocpodoc uses helix like key bindings.
 | Ctrl-e | scroll the window up one line |
 | Ctrl-y | scroll the window down one line |
 
-### Changes
+#### Changes
 
 | key | description |
 | --- | ----------- |
+| i   | Insert before selection |
+| a   | Insert after selection (append) |
 | o   | Open new line below selection |
 | O   | Open new line above selection |
+
+### Insert mode
+
+Accessed by typing i in normal mode.
+
+| key | description |
+| --- | ----------- |
