@@ -6,11 +6,15 @@ use crossterm::event::{
 
 #[derive(Clone, Copy)]
 pub enum System {
-    Save,
     Resize(Size),
-    Quit,
     Dismiss,
     Search,
+    TypeableCommand,
+    Action,
+    Insert,
+    Append,
+    OpenBelow,
+    OpenAbove,
 }
 
 impl TryFrom<KeyEvent> for System {
@@ -22,17 +26,24 @@ impl TryFrom<KeyEvent> for System {
 
         if modifiers == KeyModifiers::CONTROL {
             match code {
-                Char('q') => Ok(Self::Quit),
-                Char('s') => Ok(Self::Save),
-                Char('f') => Ok(Self::Search),
                 _ => Err(format!("Unsupported CONTROL+{code:?} combination")),
             }
         } else if modifiers == KeyModifiers::NONE && matches!(code, KeyCode::Esc) {
             Ok(Self::Dismiss)
+        } else if modifiers == KeyModifiers::NONE && matches!(code, KeyCode::Enter) {
+            Ok(Self::Action)
         } else {
-            Err(format!(
-                "Unsupported key code {code:?} or modifier {modifiers:?}"
-            ))
+            match code {
+                Char(':') => Ok(Self::TypeableCommand),
+                Char('i') => Ok(Self::Insert),
+                Char('a') => Ok(Self::Append),
+                Char('/') => Ok(Self::Search),
+                Char('o') => Ok(Self::OpenBelow),
+                Char('O') => Ok(Self::OpenAbove),
+                _ => Err(format!(
+                    "Unsupported key code {code:?} or modifier {modifiers:?}"
+                ))
+            }
         }
     }
 }

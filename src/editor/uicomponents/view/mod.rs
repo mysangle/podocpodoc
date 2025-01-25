@@ -175,6 +175,26 @@ impl View {
 
     // endregion
     // region: Text editing
+    pub fn open_newline_below(&mut self) {
+        self.handle_move_command(Move::EndOfLine);
+        self.buffer.insert_newline(self.text_location);
+        self.handle_move_command(Move::Down);
+        self.set_needs_redraw(true);
+    }
+
+    pub fn open_newline_above(&mut self) {
+        if self.text_location.line_idx == 0 {
+            self.handle_move_command(Move::StartOfLine);
+            self.handle_move_command(Move::Up);
+        } else {
+            self.handle_move_command(Move::Up);
+            self.handle_move_command(Move::EndOfLine);
+        }
+        
+        self.buffer.insert_newline(self.text_location);
+        self.set_needs_redraw(true);
+    }
+    
     fn insert_newline(&mut self) {
         self.buffer.insert_newline(self.text_location);
         self.handle_move_command(Move::Right);

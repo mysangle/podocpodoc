@@ -1,6 +1,7 @@
 use crate::prelude::*;
 use crossterm::event::Event;
 use std::convert::TryFrom;
+
 mod movecommand;
 pub use movecommand::Move;
 mod system;
@@ -25,6 +26,22 @@ impl TryFrom<Event> for Command {
                 .map(Command::Edit)
                 .or_else(|_| Move::try_from(key_event).map(Command::Move))
                 .or_else(|_| System::try_from(key_event).map(Command::System))
+                .map_err(|_err| format!("Event not supported: {key_event:?}")),
+            Event::Resize(width_u16, height_u16) => Ok(Self::System(System::Resize(Size {
+                height: height_u16 as usize,
+                width: width_u16 as usize,
+            }))),
+            _ => Err(format!("Event not supported: {event:?}")),
+        }
+    }
+}
+
+impl Command {
+    pub fn handle_normal_event(event: Event) -> Result<Self, String> {
+        match event {
+            Event::Key(key_event) => System::try_from(key_event).map(Command::System)
+                .or_else(|_| Move::try_from(key_event).map(Command::Move))
+                .or_else(|_| Edit::try_from(key_event).map(Command::Edit))
                 .map_err(|_err| format!("Event not supported: {key_event:?}")),
             Event::Resize(width_u16, height_u16) => Ok(Self::System(System::Resize(Size {
                 height: height_u16 as usize,
