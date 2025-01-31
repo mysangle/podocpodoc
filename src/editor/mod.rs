@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use crossterm::event::{read, Event, KeyCode, KeyEvent, KeyEventKind};
+use crossterm::event::{read, Event, KeyEvent, KeyEventKind};
 use std::{
     env,
     io::Error,
@@ -26,11 +26,9 @@ use uicomponents::{CommandBar, MessageBar, StatusBar, UIComponent, View};
 use self::command::{
     Command::{self, Edit, Move, System},
     Edit::InsertNewline,
-    Move::{Down, EndOfLine, Left, Right, Up},
+    Move::{Down, Left, Right, Up},
     System::{Action, Append, Dismiss, Insert, OpenAbove, OpenBelow, Resize, Search, TypeableCommand},
 };
-
-const QUIT_TIMES: u8 = 3;
 
 #[derive(Default, Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum Mode {
@@ -66,7 +64,6 @@ pub struct Editor {
     prompt_type: PromptType,
     terminal_size: Size,
     title: String,
-    quit_times: u8,
 }
 
 impl Editor {
@@ -294,25 +291,17 @@ impl Editor {
 
     // region quit command handling
 
-    // clippy::arithmetic_side_effects: quit_times is guaranteed to be between 0 and QUIT_TIMES
     #[allow(clippy::arithmetic_side_effects)]
     fn handle_quit_command(&mut self) {
-        if !self.view.get_status().is_modified || self.quit_times + 1 == QUIT_TIMES {
+        if !self.view.get_status().is_modified {
             self.should_quit = true;
         } else if self.view.get_status().is_modified {
-            self.update_message(&format!(
-                "WARNING! File has unsaved changes. Press Ctrl-Q {} more times to quit.",
-                QUIT_TIMES - self.quit_times - 1
-            ));
-
-            self.quit_times += 1;
+            self.update_message("File has unsaved changes.");
         }
     }
-    fn reset_quit_times(&mut self) {
-        if self.quit_times > 0 {
-            self.quit_times = 0;
-            self.update_message("");
-        }
+
+    fn handle_force_quit(&mut self) {
+        self.should_quit = true;
     }
     // end region
 
@@ -323,13 +312,9 @@ impl Editor {
 
     fn handle_action(&mut self, value: &str) {
         if value == "q!" {
-            self.should_quit = true;
+            self.handle_force_quit();
         } else if value == "q" {
-            if !self.view.get_status().is_modified {
-                self.should_quit = true;
-            } else {
-                self.update_message("File has unsaved changes.");
-            }
+            self.handle_quit_command();
         } else if value == "w" {
             if self.view.get_status().is_modified {
                 self.handle_save_command();
@@ -338,7 +323,7 @@ impl Editor {
             if self.view.get_status().is_modified {
                 self.handle_save_command();
             }
-            self.should_quit = true;
+            self.handle_force_quit();
         }
 
         self.set_prompt(PromptType::None);
