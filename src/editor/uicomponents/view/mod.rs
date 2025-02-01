@@ -10,12 +10,19 @@ use super::super::{
 use super::UIComponent;
 mod buffer;
 use buffer::Buffer;
+
+mod buffer_rope;
+use buffer_rope::BufferRope;
+
 mod searchdirection;
 use searchdirection::SearchDirection;
+
 mod highlighter;
 use highlighter::Highlighter;
+
 mod fileinfo;
 use fileinfo::FileInfo;
+
 mod searchinfo;
 use searchinfo::SearchInfo;
 
