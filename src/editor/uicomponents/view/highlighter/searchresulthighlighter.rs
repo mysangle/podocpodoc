@@ -59,6 +59,11 @@ impl<'a> SyntaxHighlighter for SearchResultHighlighter<'a> {
         }
         self.highlights.insert(idx, result);
     }
+
+    fn highlight_string(&mut self, idx: LineIdx, line_str: &str) {
+        
+    }
+    
     fn get_annotations(&self, idx: LineIdx) -> Option<&Vec<Annotation>> {
         self.highlights.get(&idx)
     }

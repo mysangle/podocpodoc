@@ -56,4 +56,13 @@ impl<'a> Highlighter<'a> {
             search_result_highlighter.highlight(idx, line);
         }
     }
+
+    pub fn highlight_string(&mut self, idx: LineIdx, line_str: &str) {
+        if let Some(syntax_highlighter) = &mut self.syntax_highlighter {
+            syntax_highlighter.highlight_string(idx, line_str);
+        }
+        if let Some(search_result_highlighter) = &mut self.search_result_highlighter {
+            search_result_highlighter.highlight_string(idx, line_str);
+        }
+    }
 }

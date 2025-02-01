@@ -132,11 +132,22 @@ impl RustSyntaxHighlighter {
             end: string.len(),
         })
     }
+
     fn initial_annotation(&mut self, line: &Line) -> Option<Annotation> {
         if self.in_ml_string {
             self.annotate_string(line)
         } else if self.ml_comment_balance > 0 {
             self.annotate_ml_comment(line)
+        } else {
+            None
+        }
+    }
+
+    fn initial_annotation_string(&mut self, line_str: &str) -> Option<Annotation> {
+        if self.in_ml_string {
+            self.annotate_string(line_str)
+        } else if self.ml_comment_balance > 0 {
+            self.annotate_ml_comment(line_str)
         } else {
             None
         }
@@ -173,6 +184,39 @@ impl SyntaxHighlighter for RustSyntaxHighlighter {
         }
         while let Some((start_idx, _)) = iterator.next() {
             let remainder = &line[start_idx..];
+            if let Some(mut annotation) = self.annotate_remainder(remainder) {
+                annotation.shift(start_idx);
+                result.push(annotation);
+                // Skip over any subsequent word which has already been annotated in this step
+                while let Some(&(next_idx, _)) = iterator.peek() {
+                    if next_idx >= annotation.end {
+                        break;
+                    }
+                    iterator.next();
+                }
+            };
+        }
+        self.highlights.push(result);
+    }
+
+    fn highlight_string(&mut self, idx: LineIdx, line_str: &str) {
+        debug_assert_eq!(idx, self.highlights.len());
+        let mut result = Vec::new();
+        let mut iterator = line_str.split_word_bound_indices().peekable();
+        if let Some(annotation) = self.initial_annotation_string(line_str) {
+            //handle dangling multi line annotations (i.e. ML comments or strings)
+
+            result.push(annotation);
+            // Skip over any subsequent word which has already been annotated in this step
+            while let Some(&(next_idx, _)) = iterator.peek() {
+                if next_idx >= annotation.end {
+                    break;
+                }
+                iterator.next();
+            }
+        }
+        while let Some((start_idx, _)) = iterator.next() {
+            let remainder = &line_str[start_idx..];
             if let Some(mut annotation) = self.annotate_remainder(remainder) {
                 annotation.shift(start_idx);
                 result.push(annotation);

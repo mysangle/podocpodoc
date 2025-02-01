@@ -4,7 +4,10 @@ use std::{
     ops::Range,
 };
 
-use crate::prelude::*;
+use crate::{
+    editor::Annotation,
+    prelude::*,
+};
 use super::{AnnotatedString, Highlighter, FileInfo};
 
 use ropey::Rope;
@@ -122,7 +125,14 @@ impl BufferRope {
     }
 
     pub fn highlight(&self, idx: LineIdx, highlighter: &mut Highlighter) {
-        
+        let start_idx = self.text.line_to_char(idx);
+        let end_idx = if idx + 1 == self.height() {
+            self.text.len_chars()
+        } else {
+            self.text.line_to_char(idx + 1)
+        };
+
+        highlighter.highlight_string(idx, &self.text.slice(start_idx..end_idx).to_string());
     }
 
     pub fn get_highlighted_substring(
@@ -141,7 +151,10 @@ impl BufferRope {
         } else {
             self.text.line_to_char(line_idx + 1)
         };
-        Some(AnnotatedString::from(&self.text.slice(start_idx..end_idx).to_string()))
+        let line_str = self.text.slice(start_idx..end_idx).to_string();
+        self.get_annotated_visible_substr(&line_str, range, Some(&highlighter.get_annotations(line_idx)));
+
+        Some(AnnotatedString::from(&line_str))
     }
 
     pub fn grapheme_count(&self, idx: LineIdx) -> GraphemeIdx {
@@ -160,5 +173,73 @@ impl BufferRope {
 
     pub fn width_until(&self, idx: LineIdx, until: GraphemeIdx) -> GraphemeIdx {
         until
+    }
+
+    fn get_annotated_visible_substr(
+        &self,
+        line_str: &str,
+        range: Range<ColIdx>,
+        annotations: Option<&Vec<Annotation>>,
+    ) -> AnnotatedString {
+        if range.start >= range.end {
+            return AnnotatedString::default();
+        }
+        // Create a new annotated string
+        let mut result = AnnotatedString::from(line_str);
+
+        // Apply annotations for this string
+        if let Some(annotations) = annotations {
+            for annotation in annotations {
+                result.add_annotation(annotation.annotation_type, annotation.start, annotation.end);
+            }
+        }
+
+        // Insert replacement characters, and truncate if needed.
+        // We do this backwards, otherwise the byte indices would be off in case a replacement character has a different width than the original character.
+
+        // let mut fragment_start = self.width();
+        // for fragment in self.fragments.iter().rev() {
+        //     let fragment_end = fragment_start;
+        //     fragment_start = fragment_start.saturating_sub(fragment.rendered_width.into());
+
+        //     if fragment_start > range.end {
+        //         continue; // No  processing needed if we haven't reached the visible range yet.
+        //     }
+
+        //     // clip right if the fragment is partially visible
+        //     if fragment_start < range.end && fragment_end > range.end {
+        //         result.replace(fragment.start, line_str.len(), "⋯");
+        //         continue;
+        //     } else if fragment_start == range.end {
+        //         // Truncate right if we've reached the end of the visible range
+        //         result.truncate_right_from(fragment.start);
+        //         continue;
+        //     }
+
+        //     // Fragment ends at the start of the range: Remove the entire left side of the string (if not already at start of string)
+        //     if fragment_end <= range.start {
+        //         result.truncate_left_until(fragment.start.saturating_add(fragment.grapheme.len()));
+        //         break; //End processing since all remaining fragments will be invisible.
+        //     } else if fragment_start < range.start && fragment_end > range.start {
+        //         // Fragment overlaps with the start of range: Remove the left side of the string and add an ellipsis
+        //         result.replace(
+        //             0,
+        //             fragment.start.saturating_add(fragment.grapheme.len()),
+        //             "⋯",
+        //         );
+        //         break; //End processing since all remaining fragments will be invisible.
+        //     }
+
+        //     // Fragment is fully within range: Apply replacement characters if appropriate
+        //     if fragment_start >= range.start && fragment_end <= range.end {
+        //         if let Some(replacement) = fragment.replacement {
+        //             let start = fragment.start;
+        //             let end = start.saturating_add(fragment.grapheme.len());
+        //             result.replace(start, end, &replacement.to_string());
+        //         }
+        //     }
+        // }
+
+        result
     }
 }
