@@ -32,7 +32,7 @@ impl TryFrom<KeyEvent> for System {
             Ok(Self::Dismiss)
         } else if modifiers == KeyModifiers::NONE && matches!(code, KeyCode::Enter) {
             Ok(Self::Action)
-        } else {
+        } else if modifiers == KeyModifiers::NONE {
             match code {
                 Char(':') => Ok(Self::TypeableCommand),
                 Char('i') => Ok(Self::Insert),
@@ -44,6 +44,10 @@ impl TryFrom<KeyEvent> for System {
                     "Unsupported key code {code:?} or modifier {modifiers:?}"
                 ))
             }
+        } else {
+            Err(format!(
+                "Unsupported key code {code:?} or modifier {modifiers:?}"
+            ))
         }
     }
 }

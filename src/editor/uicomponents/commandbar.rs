@@ -67,5 +67,6 @@ impl UIComponent for CommandBar {
             String::new()
         };
         Terminal::print_row(origin, &to_print)
+        
     }
 }
